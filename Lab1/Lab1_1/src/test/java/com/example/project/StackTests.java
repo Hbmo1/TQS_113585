@@ -51,12 +51,23 @@ class StackTests {
 		assertEquals(0, myStack.size());
 	}
 
-	@DisplayName("🧪 Assure empty stack stays empty after popping")
+	@DisplayName("🧪 Assure popping from an empty stack throws a NoSuchElementException"
+			+ " and does not affect the stack size")
 	@Test
 	void popEmptyTest() {
 
 		// verify
 		assertThrows(NoSuchElementException.class, () -> myStack.pop());
+		assertEquals(0, myStack.size());
+	}
+
+	@DisplayName("🧪 Assure peeking from an empty stack throws a NoSuchElementException"
+			+ " and does not affect the stack size")
+	@Test
+	void peekEmptyTest() {
+
+		// verify
+		assertThrows(NoSuchElementException.class, () -> myStack.peek());
 		assertEquals(0, myStack.size());
 	}
 
@@ -80,7 +91,7 @@ class StackTests {
 	@Test
 	void pushNTest() {
 
-		// import and usee a random number
+		// setup
 		int n = (int) (Math.random() * 100);
 		// exercise
 		for (int i = 0; i < n; i++) {
@@ -106,6 +117,42 @@ class StackTests {
 		assertEquals(3, myStack.peek());
 		assertEquals(3, myStack.size());
 
+	}
+
+	@DisplayName("🧪 Test popping top N values")
+	@Test
+	void popNTest() {
+
+		// setup
+		myStack.push(1);
+		myStack.push(2);
+		myStack.push(3);
+		myStack.push(4);
+		myStack.push(5);
+
+		// exercise
+		int top = myStack.popTopN(3);
+
+		// verify
+		assertEquals(3, top);
+		assertEquals(2, myStack.size());
+		assertEquals(2, myStack.pop());
+		assertEquals(1, myStack.pop());
+	}
+
+	@DisplayName("🧪 Test popping top N values, with N bigger than stack size")
+	@Test
+	void popNBiggerThanSizeTest() {
+
+		// setup
+		myStack.push(1);
+		myStack.push(2);
+		myStack.push(3);
+
+		int n = 5;
+
+		// verify
+		assertThrows(NoSuchElementException.class, () -> myStack.popTopN(n));
 	}
 
 	// @AfterEach
