@@ -17,12 +17,11 @@ class BoundedSetOfNaturalsTest {
     private BoundedSetOfNaturals setB;
     private BoundedSetOfNaturals setC;
 
-
     @BeforeEach
     public void setUp() {
         setA = new BoundedSetOfNaturals(1);
-        setB = BoundedSetOfNaturals.fromArray(new int[]{10, 20, 30, 40, 50, 60});
-        setC = BoundedSetOfNaturals.fromArray(new int[]{50, 60});
+        setB = BoundedSetOfNaturals.fromArray(new int[] { 10, 20, 30, 40, 50, 60 });
+        setC = BoundedSetOfNaturals.fromArray(new int[] { 50, 60 });
     }
 
     @AfterEach
@@ -43,14 +42,45 @@ class BoundedSetOfNaturalsTest {
         assertEquals(7, setB.size(), "add: elements count not as expected.");
     }
 
-    @Disabled("TODO revise to test the construction from invalid arrays")
+    @DisplayName("Test add from array with invalid elements (non-natural / duplicates / empty array)")
     @Test
     public void testAddFromBadArray() {
-        int[] elems = new int[]{10, -20, -30};
+        int[] notNaturalElems = new int[] { 10, -20, -30 };
 
         // must fail with exception
-        assertThrows(IllegalArgumentException.class, () -> setA.add(elems));
+        assertThrows(IllegalArgumentException.class, () -> setA.add(notNaturalElems));
+
+        int[] duplicateElems = new int[] { 10, 20, 30, 40, 50, 60, 60 };
+
+        // must fail with exception
+        assertThrows(IllegalArgumentException.class, () -> setA.add(duplicateElems));
+
+        // empty array
+        int[] emptyArray = new int[] {};
+
+        // must fail with exception
+        assertThrows(IllegalArgumentException.class, () -> setA.add(emptyArray));
     }
 
+    @DisplayName("Test set creation from array with invalid elements (non-natural / duplicates / empty array)")
+    @Test
+    public void testFromArray() {
+        int[] notNaturalElems = new int[] { 10, -20, -30 };
+
+        // must fail with exception
+        assertThrows(IllegalArgumentException.class, () -> setA.fromArray(notNaturalElems));
+
+        int[] duplicateElems = new int[] { 10, 20, 30, 40, 50, 60, 60 };
+
+        // must fail with exception
+        assertThrows(IllegalArgumentException.class, () -> setA.fromArray(duplicateElems));
+
+        // empty array
+        int[] emptyArray = new int[] {};
+
+        // must fail with exception
+        assertThrows(IllegalArgumentException.class, () -> setA.fromArray(emptyArray));
+
+    }
 
 }
