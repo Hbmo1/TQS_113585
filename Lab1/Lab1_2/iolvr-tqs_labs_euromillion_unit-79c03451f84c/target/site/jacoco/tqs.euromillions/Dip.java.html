@@ -61,14 +61,14 @@ public class Dip {
 <span class="fc" id="L61">        Dip randomDip = new Dip();</span>
 <span class="fc bfc" id="L62" title="All 2 branches covered.">        for (int i = 0; i &lt; NUMBERS_REQUIRED;) {</span>
 <span class="fc" id="L63">            int candidate = generator.nextInt(NUMBERS_RANGE_MAX) + 1;</span>
-<span class="fc bfc" id="L64" title="All 2 branches covered.">            if (!randomDip.getNumbersColl().contains(candidate)) {</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            if (!randomDip.getNumbersColl().contains(candidate)) {</span>
 <span class="fc" id="L65">                randomDip.getNumbersColl().add(candidate);</span>
 <span class="fc" id="L66">                i++;</span>
             }
 <span class="fc" id="L68">        }</span>
 <span class="fc bfc" id="L69" title="All 2 branches covered.">        for (int i = 0; i &lt; STARS_REQUIRED;) {</span>
 <span class="fc" id="L70">            int candidate = generator.nextInt(STARS_RANGE_MAX) + 1;</span>
-<span class="pc bpc" id="L71" title="1 of 2 branches missed.">            if (!randomDip.getStarsColl().contains(candidate)) {</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (!randomDip.getStarsColl().contains(candidate)) {</span>
 <span class="fc" id="L72">                randomDip.getStarsColl().add(candidate);</span>
 <span class="fc" id="L73">                i++;</span>
             }

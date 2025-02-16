@@ -16,30 +16,40 @@ class BoundedSetOfNaturalsTest {
     private BoundedSetOfNaturals setA;
     private BoundedSetOfNaturals setB;
     private BoundedSetOfNaturals setC;
+    private BoundedSetOfNaturals setD;
 
     @BeforeEach
     public void setUp() {
         setA = new BoundedSetOfNaturals(1);
         setB = BoundedSetOfNaturals.fromArray(new int[] { 10, 20, 30, 40, 50, 60 });
         setC = BoundedSetOfNaturals.fromArray(new int[] { 50, 60 });
+        setD = new BoundedSetOfNaturals(2);
     }
 
     @AfterEach
     public void tearDown() {
-        setA = setB = setC = null;
+        setA = setB = setC = setD = null;
     }
 
-    @Disabled("TODO revise test logic")
+    @DisplayName("Test add element to set")
     @Test
     public void testAddElement() {
 
         setA.add(99);
         assertTrue(setA.contains(99), "add: added element not found in set.");
         assertEquals(1, setA.size());
+        // Try to add a second element to a set with maxSize = 1
+        assertThrows(IllegalArgumentException.class, () -> setA.add(100));
+        assertEquals(1, setA.size());
 
-        setB.add(11);
-        assertTrue(setB.contains(11), "add: added element not found in set.");
-        assertEquals(7, setB.size(), "add: elements count not as expected.");
+        setD.add(11);
+        assertEquals(1, setD.size(), "add: elements count not as expected.");
+        // Try to add a duplicate element
+        assertThrows(IllegalArgumentException.class, () -> setD.add(11));
+        assertEquals(1, setD.size(), "add: elements count not as expected.");
+        // Try to add a non-natural element
+        assertThrows(IllegalArgumentException.class, () -> setD.add(-11));
+        assertEquals(1, setD.size(), "add: elements count not as expected.");
     }
 
     @DisplayName("Test add from array with invalid elements (non-natural / duplicates / empty array)")
@@ -68,18 +78,18 @@ class BoundedSetOfNaturalsTest {
         int[] notNaturalElems = new int[] { 10, -20, -30 };
 
         // must fail with exception
-        assertThrows(IllegalArgumentException.class, () -> setA.fromArray(notNaturalElems));
+        assertThrows(IllegalArgumentException.class, () -> BoundedSetOfNaturals.fromArray(notNaturalElems));
 
         int[] duplicateElems = new int[] { 10, 20, 30, 40, 50, 60, 60 };
 
         // must fail with exception
-        assertThrows(IllegalArgumentException.class, () -> setA.fromArray(duplicateElems));
+        assertThrows(IllegalArgumentException.class, () -> BoundedSetOfNaturals.fromArray(duplicateElems));
 
         // empty array
         int[] emptyArray = new int[] {};
 
         // must fail with exception
-        assertThrows(IllegalArgumentException.class, () -> setA.fromArray(emptyArray));
+        assertThrows(IllegalArgumentException.class, () -> BoundedSetOfNaturals.fromArray(emptyArray));
 
     }
 

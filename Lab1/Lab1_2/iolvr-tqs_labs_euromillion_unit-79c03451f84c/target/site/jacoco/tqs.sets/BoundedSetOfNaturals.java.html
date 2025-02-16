@@ -18,15 +18,15 @@ public class BoundedSetOfNaturals implements Iterable&lt;Integer&gt; {
     private int maxSize;
 
     public void add(int element) {
-<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        if (this.collection.size() &gt;= maxSize) {</span>
-<span class="nc" id="L22">            throw new IllegalArgumentException(&quot;bounded set is full. no more elements allowed.&quot;);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (this.collection.size() &gt;= maxSize) {</span>
+<span class="fc" id="L22">            throw new IllegalArgumentException(&quot;bounded set is full. no more elements allowed.&quot;);</span>
         }
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (this.collection.contains(element)) {</span>
-<span class="nc" id="L25">            throw new IllegalArgumentException(&quot;duplicate value: &quot; + element);</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (this.collection.contains(element)) {</span>
+<span class="fc" id="L25">            throw new IllegalArgumentException(&quot;duplicate value: &quot; + element);</span>
         }
 
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (element &lt;= 0) {</span>
-<span class="nc" id="L29">            throw new IllegalArgumentException(&quot;Illegal argument: not a natural number&quot;);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (element &lt;= 0) {</span>
+<span class="fc" id="L29">            throw new IllegalArgumentException(&quot;Illegal argument: not a natural number&quot;);</span>
         }
 
 <span class="fc" id="L32">        collection.add(element);</span>
@@ -80,7 +80,7 @@ public class BoundedSetOfNaturals implements Iterable&lt;Integer&gt; {
     }
 
     public int size() {
-<span class="nc" id="L83">        return this.collection.size();</span>
+<span class="fc" id="L83">        return this.collection.size();</span>
     }
 
     // TODO implement the intersect logic
