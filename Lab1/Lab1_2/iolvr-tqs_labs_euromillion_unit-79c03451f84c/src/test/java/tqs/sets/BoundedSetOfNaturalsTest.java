@@ -7,6 +7,8 @@ package tqs.sets;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
+
+import tqs.euromillions.Dip;
 import tqs.sets.BoundedSetOfNaturals;
 
 /**
@@ -93,4 +95,42 @@ class BoundedSetOfNaturalsTest {
 
     }
 
+    @DisplayName("Test set comparison")
+    @Test
+    public void testEquals() {
+
+        // null set
+        BoundedSetOfNaturals other = null;
+        assertFalse(setB.equals(other));
+
+        // different class
+        assertFalse(setB.equals(new Object()));
+
+        // different size set
+        other = BoundedSetOfNaturals.fromArray(new int[] { 10, 20, 30 });
+        assertFalse(setB.equals(other));
+
+        // different values set
+        other = BoundedSetOfNaturals.fromArray(new int[] { 10, 20, 30, 40, 49, 60 });
+        assertFalse(setB.equals(other));
+
+        // same values set
+        other = BoundedSetOfNaturals.fromArray(new int[] { 10, 20, 30, 40, 50, 60 });
+        assertTrue(setB.equals(other));
+
+        // same Dip
+        assertTrue(setB.equals(setB));
+    }
+
+    @DisplayName("Test set intersection")
+    @Test
+    public void testIntersection() {
+
+        // setup
+        BoundedSetOfNaturals subsetB = BoundedSetOfNaturals.fromArray(new int[] { 10, 40, 50, 60 });
+        BoundedSetOfNaturals wrongSubset = BoundedSetOfNaturals.fromArray(new int[] { 10, 40, 50, 60, 70 });
+        // verify
+        assertTrue(setB.intersects(subsetB));
+        assertFalse(setB.intersects(wrongSubset));
+    }
 }
