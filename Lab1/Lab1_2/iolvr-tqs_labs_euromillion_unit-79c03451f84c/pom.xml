@@ -74,6 +74,10 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
+                            <excludes>
+                                <exclude>**/test/**</exclude>
+                                <exclude>**/DemoMain*</exclude>
+                            </excludes>
                             <rules>
                             <rule>
                                 <element>CLASS</element>
@@ -84,10 +88,6 @@
                                         <minimum>0.90</minimum>
                                     </limit>
                                 </limits>
-                                <excludes>
-                                    <exclude>**/test/**</exclude>
-                                    <exclude>**/*tqs/DemoMain.java</exclude>
-                                </excludes>
                             </rule>
                             </rules>
                         </configuration>
