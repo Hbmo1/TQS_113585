@@ -6,11 +6,11 @@ import java.util.Optional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
-public class ProductFinderService implements ISimpleHttpClient {
+public class ProductFinderService {
     public String apiProducts = "https://fakestoreapi.com/products/";
-    private ISimpleHttpClient httpClient;
+    private TqsBasicHttpClient httpClient;
 
-    public ProductFinderService(ISimpleHttpClient httpClient) {
+    public ProductFinderService(TqsBasicHttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -26,11 +26,6 @@ public class ProductFinderService implements ISimpleHttpClient {
         Product product = objectMapper.readValue(response, Product.class); // Throws IOException naturally
         System.out.println(product);
         return Optional.of(product);
-    }
-
-    @Override
-    public String doHttpGet(String url) {
-        return url;
     }
 
 }
