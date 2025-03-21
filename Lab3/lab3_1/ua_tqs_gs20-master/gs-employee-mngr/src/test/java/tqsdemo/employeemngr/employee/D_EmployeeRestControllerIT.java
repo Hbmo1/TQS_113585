@@ -26,15 +26,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Run as a SpringBoot test. The parameters to SpringBootTest could be omitted, but, in this case,
- * we are trying to limit the web context to a simplified web framework, and load the designated application
+ * Run as a SpringBoot test. The parameters to SpringBootTest could be omitted,
+ * but, in this case,
+ * we are trying to limit the web context to a simplified web framework, and
+ * load the designated application
  */
-//@SpringBootTest
+// @SpringBootTest
 
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK, classes = EmployeeMngrApplication.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
-// adapt AutoConfigureTestDatabase with TestPropertySource to use a real database
+// adapt AutoConfigureTestDatabase with TestPropertySource to use a real
+// database
 // @TestPropertySource(locations = "application-integrationtest.properties")
 class D_EmployeeRestControllerIT {
 
@@ -50,7 +53,7 @@ class D_EmployeeRestControllerIT {
     }
 
     @Test
-     void whenValidInput_thenCreateEmployee() throws Exception {
+    void whenValidInput_thenCreateEmployee() throws Exception {
         Employee bob = new Employee("bob", "bob@deti.com");
         mvc.perform(post("/api/employees").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(bob)));
 
@@ -59,7 +62,7 @@ class D_EmployeeRestControllerIT {
     }
 
     @Test
-     void givenEmployees_whenGetEmployees_thenStatus200() throws Exception {
+    void givenEmployees_whenGetEmployees_thenStatus200() throws Exception {
         createTestEmployee("bob", "bob@deti.com");
         createTestEmployee("alex", "alex@deti.com");
 
@@ -76,6 +79,5 @@ class D_EmployeeRestControllerIT {
         Employee emp = new Employee(name, email);
         repository.saveAndFlush(emp);
     }
-
 
 }

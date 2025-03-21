@@ -11,4 +11,6 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     public List<Car> findAll();
 
+    public List<Car> findByMaker(String maker);
+
 }

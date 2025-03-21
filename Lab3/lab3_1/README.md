@@ -53,3 +53,13 @@ The test file "B_EmployeeService_UnitTest.java" has a mocked repository, since i
 
 @Mock comes from Mockito, used to create plain mocks and is not managed by Spring. It only works inside the test classes where it is declred and can be used along with unit tests
 @MockBean comes from Sprint Boot, used to create a Spring-managed mock and replaces the corresponding Bean in the Spring context. Used for integration tests with annotations such as @SpringBootTest, @WebMvcTest, or @DataJpaTest.
+
+## E) What is the role of the file “application-integrationtest.properties”? In which conditions will it be used?
+
+It contains the database configuration needed for the integration tests, only used during those tests and overriding the normal application.properties file.  
+
+## F) The sample project demonstrates three test strategies to assess an API (C, D and E) developed with SpringBoot. Which are the main/key differences?
+
+C is sa sliced approach, only covering Controller tests, mocking the service layer and using MockMvc to simulate HTTP requests and responses.
+D is a full scope approach, lodaing the full Spring Boot application, including the service and db logic that was mocked in C. However, D still tests the API endpoints with a mocked Mvc and not the real API.
+E is a full scope approach, almost identical to D, except it sends HTTP requests to a real API, instead of a mocked version.

@@ -37,6 +37,15 @@ public class CarService_UnitTests {
         Car car2 = new Car("BMW", "X6");
         Car car3 = new Car("Mercedes", "C220");
 
+        // Manually setting the IDs (since no DB is being used)
+        car1.setCarId(1L);
+        car2.setCarId(2L);
+        car3.setCarId(3L);
+
+        // System.out.println("car1 id: " + car1.getCarId());
+        // System.out.println("car1 id: " + car2.getCarId());
+        // System.out.println("car1 id: " + car3.getCarId());
+
         List<Car> allCars = Arrays.asList(car1, car2, car3);
 
         Mockito.when(carRepository.findByCarId(car1.getCarId())).thenReturn(car1);

@@ -18,14 +18,14 @@ public class CarController {
         this.carManagerService = injectedCarManagerService;
     }
 
-
-    @PostMapping("/cars") public ResponseEntity<Car> createCar(@RequestBody Car oneCar) {
+    @PostMapping("/cars")
+    public ResponseEntity<Car> createCar(@RequestBody Car oneCar) {
         HttpStatus status = HttpStatus.CREATED;
         Car saved = carManagerService.save(oneCar);
         return new ResponseEntity<>(saved, status);
     }
 
-    @GetMapping(path = "/cars",  produces = "application/json")
+    @GetMapping(path = "/cars", produces = "application/json")
     public List<Car> getAllCars() {
         return carManagerService.getAllCars();
     }
@@ -36,6 +36,22 @@ public class CarController {
         Car car = carManagerService.getCarDetails(carId)
                 .orElseThrow(() -> new ResourceNotFoundException("Car not found for id: " + carId));
         return ResponseEntity.ok().body(car);
+    }
+
+    // d) Add a new endpoint that allows to get a car similar to a given one.
+    @GetMapping("/cars/similar")
+    public ResponseEntity<Car> getSimilarCar(@RequestBody Car car) throws ResourceNotFoundException {
+        List<Car> similarCars = carManagerService.findSimilarCar(car)
+                .orElseThrow(() -> new ResourceNotFoundException("Car not found"));
+        if (similarCars.isEmpty()) {
+            throw new ResourceNotFoundException("Car not found");
+        }
+        for (Car c : similarCars) {
+            if (!c.getCarId().equals(car.getCarId())) {
+                return ResponseEntity.ok().body(c);
+            }
+        }
+        return ResponseEntity.ok().body(null);
     }
 
 }

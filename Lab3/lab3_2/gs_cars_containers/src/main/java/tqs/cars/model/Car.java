@@ -27,6 +27,10 @@ public class Car {
         return carId;
     }
 
+    public void setCarId(Long carId) {
+        this.carId = carId;
+    }
+
     public String getMaker() {
         return maker;
     }
